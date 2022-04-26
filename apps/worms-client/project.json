@@ -1,0 +1,83 @@
+{
+  "root": "apps/worms-client",
+  "sourceRoot": "apps/worms-client/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/worms-client",
+        "index": "apps/worms-client/src/index.html",
+        "baseHref": "/",
+        "main": "apps/worms-client/src/main.tsx",
+        "polyfills": "apps/worms-client/src/polyfills.ts",
+        "tsConfig": "apps/worms-client/tsconfig.app.json",
+        "assets": [
+          "apps/worms-client/src/favicon.ico",
+          "apps/worms-client/src/assets"
+        ],
+        "styles": ["apps/worms-client/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/worms-client/src/environments/environment.ts",
+              "with": "apps/worms-client/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "worms-client:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "worms-client:build:development"
+        },
+        "production": {
+          "buildTarget": "worms-client:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/worms-client/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/worms-client"],
+      "options": {
+        "jestConfig": "apps/worms-client/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

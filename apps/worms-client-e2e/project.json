@@ -1,0 +1,28 @@
+{
+  "root": "apps/worms-client-e2e",
+  "sourceRoot": "apps/worms-client-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/worms-client-e2e/cypress.json",
+        "devServerTarget": "worms-client:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "worms-client:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/worms-client-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["worms-client"]
+}
